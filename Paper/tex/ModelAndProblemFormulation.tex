@@ -1,0 +1,72 @@
+% !TEX encoding = UTF-8
+% !TeX spellcheck = en_US
+% !TEX root = ../ICPS_manipulator.tex
+The only four unique DH parameters $\theta_i$, $d_i$, $a_i$, $\alpha_i \in \R$ for each $i$ joint are commonly used to describe the serial chain manipulator kinematic \cite{Spong}. The transform matrix $T_{i-1}^i$ contains this parameters and describes transformation from the frame $i-1$ to $i$. The forward kinematic solution gives us the end-effector (frame $n$) transformation relative the base of manipulator frame $0$, using multiplication of transform matrices $i = \overline{1, n}$ we get this solution
+\begin{align}
+    T_{i - 1}^i & = \begin{bmatrix}
+        R_{i-1}^{i} & o_{i_1}^{i} \\
+        0 & 1
+    \end{bmatrix} =
+    \begin{bmatrix}
+        c_{\theta_i} & -s_{\theta_i}c_{\alpha_i} & s_{\theta_i}s_{\alpha_i} & a_{i}c_{\theta_i} \\
+        s_{\theta_i} & c_{\theta_i}c_{\alpha_i} & -c_{\theta_i}s_{\alpha_i} & a_{i}s_{\theta_i} \\
+        0 & s_{\alpha_i} & c_{\alpha_i} & d_i \\
+        0 & 0 & 0 & 1
+    \end{bmatrix}, \nonumber \\
+    \label{eq:fk-solution}
+    T_0^n & = \prod_{i=1}^n T_{i - 1}^i,
+\end{align}
+where $c_{(\cdot)} = \cos(\cdot)$ and $s_{(\cdot)} = \sin(\cdot)$, see Fig. \ref{fig:dh-convension}.
+\begin{figure}[h!]
+    \centering
+    \import{img/tikz}{DH_Frames.pdf_tex}
+    \label{fig:dh-convension}
+    \caption{DH convention visualization}
+\end{figure}
+
+Let us consider the revolute joint serial manipulator with Force/Torque sensor (Fig. \ref{fig:eef-scheme}). Relation between force and joint torques
+\begin{align}
+    \label{eq:ft-relation}
+    \tau & = J^T \mathcal{F}, &
+    \mathcal{F} = \begin{bmatrix} F_e \\ \tau_e \end{bmatrix},
+\end{align}
+where $\tau_e, F_e \in \R^3$ is the torque and force applied to end-effector that combined in the generalized force vector $\mathcal{F}$, $\tau \in \R^n$ in the joint torque vector and $J \in \R^{6 \times 6}$ is manipulator Jacobian.
+\begin{figure}[h!]
+    % \hspace*{2cm}
+    \centering
+    \import{img/tikz}{Manipulator_with_FTsensor.pdf_tex}
+    \label{fig:eef-scheme}
+    \caption{End-effector scheme}
+\end{figure}
+
+In this work we solve the \textbf{kinematic model DH parameters estimation problem}. Consider the serial manipulator with revolute joint, the forward kinematic solution \eqref{eq:fk-solution} and the force - torque relation \eqref{eq:ft-relation}. Define the unknown parameters vector $p_i$ for each joint $i = \overline{1, n}$ that combined in the vector $P$
+\begin{align}
+    p_i & =
+    \begin{bmatrix}
+        d_i \\ a_i
+    \end{bmatrix}, &
+    P & =
+    \begin{bmatrix}
+        p_0 \\ p_1 \\ \vdots \\ p_n
+    \end{bmatrix}, &
+    i & = \overline{1, n}.
+\end{align} \\
+Design the estimator
+\begin{align}
+\hat{P} = f(\mathcal{F}, \tau, \theta, \alpha)
+\end{align}
+such that
+\begin{align}
+    \lim_{t\to\infty} {P - \hat{P}} = 0
+\end{align}
+
+As usual to design the estimator we need the following assumptions
+\begin{assumption}
+    The only measurable signals are $\mathcal{F}$, $\tau$, $\theta$, the $\alpha$ parameter is known
+\end{assumption}
+
+{\color{red} **Problem of the section above}
+
+{\color{red} Say that we estimate only $d_i$ and $a_i$}
+
+{\color{red} Define the vectors $\theta = \begin{bmatrix} \theta_1 \\ \theta_2 \\ \vdots \\ \theta_n \end{bmatrix}$, $\alpha = \begin{bmatrix} \alpha_1 \\ \alpha_2 \\ \vdots \\ \alpha_n \end{bmatrix}$}

@@ -1,3 +1,8 @@
+% !TEX encoding = UTF-8
+% !TeX spellcheck = en_US
+% !TEX root = ICPS_manipulator.tex
+% !TEX program = pdflatex
+% !TEX options = -shell-escape
 \documentclass[conference]{IEEEtran}
 \IEEEoverridecommandlockouts
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
@@ -12,6 +17,32 @@
 
 % fix encoding warning
 \usepackage[OT1]{fontenc}
+
+% hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    citecolor = red,
+    linkcolor = blue,
+    filecolor = magenta,
+    urlcolor = cyan,
+}
+
+% definitions
+\newtheorem{assumption}{Assumption}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+
+% Math defenitions
+\DeclareMathOperator{\R}{\mathbb{R}}
+
+% TIKZ
+\usepackage{tikz}
+\usepackage{import}
 
 \begin{document}
 
@@ -46,9 +77,8 @@ or Math in Paper Title or Abstract.
 This document is a model and instructions for \LaTeX.
 Please observe the conference page limits.
 
-\section{Problem formulation}
-This document is a model and instructions for \LaTeX.
-Please observe the conference page limits.
+\section{Model and problem formulation}
+\input{tex/ModelAndProblemFormulation}
 
 \section{Kinematic parameters estimation}
 This document is a model and instructions for \LaTeX.
