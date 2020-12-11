@@ -1,3 +1,7 @@
+#################### Build parts
+# add ignore build directory
+build/
+
 #################### Matlab
 # Windows default autosave extension
 *.asv
